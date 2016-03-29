@@ -47,8 +47,18 @@ app.delete('/stuff/todos/:id', function(req, res) {
   })
 })
 
+app.get('/login/:username/:password', function(req, res) {
+  UsersDB.find({username: req.params.username, password: req.params.password}, function(err, response){
+    if (err) {
+      throw err
+    } else {
+      res.json({})
+      console.log('success!')
+    }
+  })
+})
+
 app.post('/register', function(req, res){
-  console.log('register route hit')
   var newUser = new UsersDB({
     username: req.body.username,
     password: req.body.password
