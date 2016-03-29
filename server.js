@@ -3,6 +3,7 @@ var logger = require('morgan');
 var app = express();
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
+var session = require('express-session')
 var PORT = 3000;
 
 app.use(logger('dev'));
@@ -16,6 +17,14 @@ var db = 'mongodb://localhost/TasksDB'
 var TasksDB = require('./model/tasks.js')
 var UsersDB = require('./model/users.js')
 mongoose.connect(db)
+
+app.set('trust proxy', 1) // trust first proxy 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 app.get('/stuff/todos', function(req, res) {
   TasksDB.find({}).exec().then(function(dbTodos) {
@@ -52,8 +61,10 @@ app.get('/login/:username/:password', function(req, res) {
     if (err) {
       throw err
     } else {
-      res.json({})
-      console.log('success!')
+      UsersDB.find({username: req.params.username}).update({authenticated: true}, function(err, response) {
+        return response;
+      })
+      console.log(response)
     }
   })
 })

@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  authenticated: Boolean
 });
 
 module.exports = mongoose.model('UsersDB', userSchema);

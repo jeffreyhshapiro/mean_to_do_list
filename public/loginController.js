@@ -3,7 +3,8 @@ angular.module('toDoMongo')
     $scope.login = function(c, d){
       $http.get('/login/'+c+'/'+d, {
         username: c,
-        password: d
+        password: d,
+        authenticated: true
       })
       $scope.login.username = ''
       $scope.login.password = ''
