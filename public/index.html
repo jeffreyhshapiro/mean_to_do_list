@@ -72,7 +72,7 @@
               <input class="form-control" id="passwordRegister" ng-model="registrationInfo.password">
             </div>
             <div class="form-group">
-              <input type='submit' class="form-control" ng-click="registration()">
+              <input type='submit' class="form-control" ng-click="registration(registrationInfo.username, registrationInfo.password)">
             </div>
           </form>
         </div>

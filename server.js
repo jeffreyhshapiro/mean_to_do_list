@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 
 var db = 'mongodb://localhost/TasksDB'
 var TasksDB = require('./model/tasks.js')
+var UsersDB = require('./model/users.js')
 mongoose.connect(db)
 
 app.get('/stuff/todos', function(req, res) {
@@ -43,6 +44,17 @@ app.get('/stuff/todos/:id/:done', function(req, res){
 app.delete('/stuff/todos/:id', function(req, res) {
   TasksDB.find({_id: req.params.id}).remove().then(function(){
     res.json({})
+  })
+})
+
+app.post('/register', function(req, res){
+  console.log('register route hit')
+  var newUser = new UsersDB({
+    username: req.body.username,
+    password: req.body.password
+  })
+  newUser.save(function(err, response) {
+    res.json(response)
   })
 })
 
