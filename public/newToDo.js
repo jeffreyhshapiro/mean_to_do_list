@@ -15,11 +15,6 @@ angular.module('toDoMongo')
         $scope.newTask = ''
         $scope.getToDos();
       });
-    //   $scope.thingsToDos.push({
-    //     task: $scope.newTask,
-    //     done: false
-    //   });
-    // console.log($scope.thingsToDos);
     $scope.newTask = ''
     };
     $scope.taskDone = function(id, done) {
@@ -32,6 +27,11 @@ angular.module('toDoMongo')
       $http.delete('/stuff/todos/'+id).then(function(){
         $scope.getToDos();
       })
-      // document.getElementById('task'+ $index).remove()
+    $scope.registration = function(registrationInfo) {
+      console.log(registrationInfo)
+      // $http.post('/register/'+userInfo.username+ '/' + userInfo.password).then(function(){
+      //   $scope.userInfo = ''
+      // })
+    }
   }
 });

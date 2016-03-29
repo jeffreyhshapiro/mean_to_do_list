@@ -30,33 +30,14 @@ app.post('/stuff/todos', function(req, res) {
   newTask.save(function(err, response) {
     res.json(response)
   })
-
-  // .then(function(response){
-  //   res.json(response)
-  //   console.log(response)
-  // })
 })
 
 app.get('/stuff/todos/:id/:done', function(req, res){
-  console.log(req.params.id)
-  console.log(req.params.done)
   TasksDB.find({_id: req.params.id})
     .update({done: req.params.done})
     .then(function(){
       res.json({})
     });
-  // if (TasksDB.find({_id: req.params.id}.done === false)) {
-  //     TasksDB.find({_id: req.params.id}).update({done:true})
-  //   .then(function(response){
-  //     res.json({})
-  //     console.log(response)
-  //   })
-  // } else {
-  //   TasksDB.find({_id: req.params.id}).update({done:true})
-  //   .then(function(response){
-  //     res.json({})
-  //     console.log(response)
-  // }
 });
 
 app.delete('/stuff/todos/:id', function(req, res) {

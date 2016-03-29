@@ -9,6 +9,9 @@
 <link rel="stylesheet" type="text/css" href="thingsToDo.css">
 
 <div ng-controller="newToDo" ng-init='getToDos()'>
+  <div class="pull-right">
+    <span> <a href="#loginModal" data-target='#loginModalToDo' id="loginModal">login</a> or <a href="#registerModal" id="registerModal" data-target='#registrationModalToDo'>register</a></span>
+  </div>
   <h1>To do list with mongo</h1>
   <div ng-repeat='thingsToDo in thingsToDos track by $index' id="task{{$index}}">
     <input type='checkbox' ng-model='thingsToDo.done' ng-click='taskDone(thingsToDo._id, thingsToDo.done)'>
@@ -19,9 +22,74 @@
   <input type='submit' ng-click="addNewTask()">
 </div>
 
+  <!-- Login modal -->
+  <div class="modal fade" id="loginModalToDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="username" class="control-label">Username</label>
+              <input type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+              <label for="password" class="control-label">Password</label>
+              <textarea class="form-control" id="password"></textarea>
+            </div>
+            <div class="form-group">
+              <input type='submit' class="form-control" ng-click="login()">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration modal -->
+
+  <div class="modal fade" id="registrationModalToDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" ng-controller='registrationController'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Register</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="username" class="control-label">Username</label>
+              <input type="text" class="form-control" id="usernameRegister" ng-model="registrationInfo.username">
+            </div>
+            <div class="form-group">
+              <label for="password" class="control-label">Password</label>
+              <input class="form-control" id="passwordRegister" ng-model="registrationInfo.password">
+            </div>
+            <div class="form-group">
+              <input type='submit' class="form-control" ng-click="registration()">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="modals.js"></script>
 <script type="text/javascript" src="ngapp.js"></script>
 <script type="text/javascript" src="newToDo.js"></script>
+<script type="text/javascript" src="registrationController.js"></script>
 </body>
 </html>

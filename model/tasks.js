@@ -4,6 +4,7 @@ var Schema = mongoose.Schema
 var taskSchema = new Schema({
   task: String,
   done: Boolean
+  user: [{type: Schema.Types.ObjectId, ref: TasksDB}]
 });
 
 module.exports = mongoose.model('TasksDB', taskSchema)
